@@ -11,7 +11,7 @@ import (
 )
 
 func getDigits(s string) []string {
-	pattern := `\d`
+	pattern := `\d|one|two|three|four|five|six|seven|eight|nine`
 	re := regexp.MustCompile(pattern)
 	return re.FindAllString(s, -1)
 }
@@ -22,8 +22,30 @@ func LineToNumber(s string) int {
 		return 0
 	}
 	numberString := strings.Builder{}
-	numberString.WriteString(digits[0])
-	numberString.WriteString(digits[len(digits)-1])
+	for _, digit := range [2]string{digits[0], digits[len(digits)-1]} {
+		// thanks copilot for this switch statement
+		// ...though without it I might've spent a little more time to figure a smarter way to do this
+		switch digit {
+		case "one", "1":
+			numberString.WriteString("1")
+		case "two", "2":
+			numberString.WriteString("2")
+		case "three", "3":
+			numberString.WriteString("3")
+		case "four", "4":
+			numberString.WriteString("4")
+		case "five", "5":
+			numberString.WriteString("5")
+		case "six", "6":
+			numberString.WriteString("6")
+		case "seven", "7":
+			numberString.WriteString("7")
+		case "eight", "8":
+			numberString.WriteString("8")
+		case "nine", "9":
+			numberString.WriteString("9")
+		}
+	}
 	number, _ := strconv.Atoi(numberString.String())
 	return number
 }

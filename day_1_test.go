@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-var testCases = []struct {
+var testCasesPart1 = []struct {
 	input    string
 	expected int
 }{
@@ -31,8 +31,57 @@ var testCases = []struct {
 	},
 }
 
-func TestLineToNumber(t *testing.T) {
-	for _, tc := range testCases {
+var testCasesPart2 = []struct {
+	input    string
+	expected int
+}{
+	{
+		input:    "two1nine",
+		expected: 29,
+	},
+	{
+		input:    "eightwothree",
+		expected: 83,
+	},
+	{
+		input:    "abcone2threexyz",
+		expected: 13,
+	},
+	{
+		input:    "xtwone3four",
+		expected: 24,
+	},
+	{
+		input:    "4nineeightseven2",
+		expected: 42,
+	},
+	{
+		input:    "zoneight234",
+		expected: 14,
+	},
+	{
+		input:    "7pqrstsixteen",
+		expected: 76,
+	},
+	{
+		input:    "two2geight",
+		expected: 28,
+	},
+}
+
+func TestLineToNumberPart1(t *testing.T) {
+	for _, tc := range testCasesPart1 {
+		t.Run(fmt.Sprintf("%s should give %d", tc.input, tc.expected), func(t *testing.T) {
+			got := LineToNumber(tc.input)
+			if got != tc.expected {
+				t.Fatalf("LineToNumber(%q)\n got: %v, want: %v", tc.input, got, tc.expected)
+			}
+		})
+	}
+}
+
+func TestLineToNumberPart2(t *testing.T) {
+	for _, tc := range testCasesPart2 {
 		t.Run(fmt.Sprintf("%s should give %d", tc.input, tc.expected), func(t *testing.T) {
 			got := LineToNumber(tc.input)
 			if got != tc.expected {
