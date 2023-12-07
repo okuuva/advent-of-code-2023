@@ -84,6 +84,18 @@ func TestLineToNumberPart1(t *testing.T) {
 	}
 }
 
+func TestSumPart1(t *testing.T) {
+	sum := 0
+	expected := 0
+	for _, tc := range testCasesPart1 {
+		sum += LineToNumber(tc.input)
+		expected += tc.expected
+	}
+	if sum != expected {
+		t.Fatalf("sum of test cases should be %d, got %d", expected, sum)
+	}
+}
+
 func TestLineToNumberPart2(t *testing.T) {
 	for _, tc := range testCasesPart2 {
 		t.Run(fmt.Sprintf("%s should give %d", tc.input, tc.expected), func(t *testing.T) {
@@ -92,5 +104,17 @@ func TestLineToNumberPart2(t *testing.T) {
 				t.Fatalf("LineToNumber(%q)\n got: %v, want: %v", tc.input, got, tc.expected)
 			}
 		})
+	}
+}
+
+func TestSumPart2(t *testing.T) {
+	sum := 0
+	expected := 0
+	for _, tc := range testCasesPart2 {
+		sum += LineToNumber(tc.input)
+		expected += tc.expected
+	}
+	if sum != expected {
+		t.Fatalf("sum of test cases should be %d, got %d", expected, sum)
 	}
 }
