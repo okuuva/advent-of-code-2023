@@ -71,6 +71,10 @@ var testCasesPart2 = []struct {
 		input:    "xxxxxxxxxxxxxxxxxxonexxxxxxxxxxxxxx",
 		expected: 11,
 	},
+	{
+		input:    "six3one4sixeighttwosbkqdjfhfroneights",
+		expected: 68,
+	},
 }
 
 func TestLineToNumberPart1(t *testing.T) {
