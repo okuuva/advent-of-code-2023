@@ -11,6 +11,9 @@ import (
 )
 
 func getDigits(s string) []string {
+	// FIXME: this does not work with overlapping numbers like oneight
+	// should instead find the index for all numbers in the string and replace first and last spelled
+	// numbers with their digit equivalent
 	pattern := `\d|one|two|three|four|five|six|seven|eight|nine`
 	re := regexp.MustCompile(pattern)
 	return re.FindAllString(s, -1)
