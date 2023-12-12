@@ -6,18 +6,10 @@ import (
 	"github.com/okuuva/advent-of-code-2023/helpers"
 )
 
-func part1() {
+func main() {
 	scanner := helpers.NewScanner("input.txt")
 	defer scanner.Close()
-
-	sum := 0
-	for scanner.Scan() {
-		card := ParseCard(scanner.Text())
-		sum += card.CountPoints()
-	}
+	sum, totalNumberOfCards := Solve(scanner)
 	fmt.Printf("part1 sum: %v\n", sum)
-}
-
-func main() {
-	part1()
+	fmt.Printf("part2 number of cards: %v\n", totalNumberOfCards)
 }
