@@ -2,6 +2,8 @@ package main
 
 import (
 	"testing"
+
+	"github.com/okuuva/advent-of-code-2023/helpers"
 )
 
 var testCases = []struct {
@@ -92,5 +94,17 @@ func TestCountPoints(t *testing.T) {
 	}
 	if sum != expected {
 		t.Fatalf("expected sum %d, got %d", expected, sum)
+	}
+}
+
+func TestSolve(t *testing.T) {
+	scanner := helpers.NewScanner("testInput.txt")
+	defer scanner.Close()
+	sum, totalNumberOfCards := Solve(scanner)
+	if sum != 13 {
+		t.Errorf("expected sum 13, got %d", sum)
+	}
+	if totalNumberOfCards != 30 {
+		t.Errorf("expected totalNumberOfCards 30, got %d", totalNumberOfCards)
 	}
 }

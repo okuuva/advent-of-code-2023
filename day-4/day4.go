@@ -12,6 +12,7 @@ type Card struct {
 	Numbers        []int
 	WinningNumbers []int
 	Points         int
+	Matches        int
 }
 
 func (c *Card) CountPoints() int {
@@ -29,6 +30,7 @@ func (c *Card) CountPoints() int {
 			case number > winningNumber:
 				continue
 			case number == winningNumber:
+				c.Matches += 1
 				if points == 0 {
 					points = 1
 				} else {
@@ -55,4 +57,21 @@ func ParseCard(s string) *Card {
 		Numbers:        helpers.AtoiSlice(parsedNumbers),
 		WinningNumbers: helpers.AtoiSlice(parsedWinningNumbers),
 	}
+}
+
+func Solve(scanner *helpers.Scanner) (int, int) {
+	pointSum := 0
+	var numberOfCards = make(map[int]int)
+	totalNumberOfCards := 0
+	for scanner.Scan() {
+		card := ParseCard(scanner.Text())
+		pointSum += card.CountPoints()
+
+		numberOfCards[card.Id] += 1
+		totalNumberOfCards += numberOfCards[card.Id]
+		for i := card.Id + 1; i <= card.Id+card.Matches; i++ {
+			numberOfCards[i] += numberOfCards[card.Id]
+		}
+	}
+	return pointSum, totalNumberOfCards
 }
