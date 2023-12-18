@@ -36,26 +36,36 @@ var parseIdRe = regexp.MustCompile(`\d+`)
 func ParseId(s string) int {
 	id := parseIdRe.FindString(s)
 	numericalId, err := strconv.Atoi(id)
-    if id == "" || err != nil {
-        log.Fatalf("failed to parse id from string '%s': %s", s, err)
-    }
+	if id == "" || err != nil {
+		log.Fatalf("failed to parse id from string '%s': %s", s, err)
+	}
 	return numericalId
 }
 
 // Atoi is a wrapper around strconv.Atoi that calls log.Fatalf on error.
 func Atoi(s string) int {
-    i, err := strconv.Atoi(s)
-    if err != nil {
-        log.Fatalf("failed to parse string '%s' to int: %s", s, err)
-    }
-    return i
+	i, err := strconv.Atoi(s)
+	if err != nil {
+		log.Fatalf("failed to parse string '%s' to int: %s", s, err)
+	}
+	return i
 }
 
 // AtoiSlice is a wrapper around Atoi that calls it for each string in the given slice.
+// Deprecated: use Map(s, Atoi) instead.
 func AtoiSlice(s []string) []int {
-    var numbers = make([]int, len(s))
-    for i, v := range s {
-        numbers[i] = Atoi(v)
-    }
-    return numbers
+	var numbers = make([]int, len(s))
+	for i, v := range s {
+		numbers[i] = Atoi(v)
+	}
+	return numbers
+}
+
+// Map applies the given function to each element in the given slice and returns a new slice with the results.
+func Map[T, V any](slice []T, fn func(T) V) []V {
+	result := make([]V, len(slice))
+	for i, t := range slice {
+		result[i] = fn(t)
+	}
+	return result
 }
