@@ -32,7 +32,7 @@ func TestSolve(t *testing.T) {
 	if part1 != 35 {
 		t.Errorf("part1: expected 35, got %d", part1)
 	}
-	if part2 != 0 {
-		t.Errorf("part2: expected 0, got %d", part2)
+	if part2 != 46 {
+		t.Errorf("part2: expected 46, got %d", part2)
 	}
 }
