@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 	"regexp"
+	"slices"
 	"strconv"
 )
 
@@ -68,4 +69,22 @@ func Map[T, V any](slice []T, fn func(T) V) []V {
 		result[i] = fn(t)
 	}
 	return result
+}
+
+// MakeRange creates a slice containing integers from start to end inclusive. Returns an empty slice if start == end.
+func MakeRange(start, end int) []int {
+	switch {
+	case end < start:
+		s := MakeRange(end, start)
+		slices.Reverse(s)
+		return s
+	case end == start:
+		return []int{}
+	}
+
+	s := make([]int, end-start+1)
+	for i, j := 0, start; j <= end; i, j = i+1, j+1 {
+		s[i] = j
+	}
+	return s
 }
