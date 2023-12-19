@@ -8,6 +8,8 @@ import (
 	"regexp"
 	"slices"
 	"strconv"
+
+	"github.com/samber/lo"
 )
 
 // Scanner is a wrapper around bufio.Scanner that also has a Close method.
@@ -87,4 +89,9 @@ func MakeRange(start, end int) []int {
 		s[i] = j
 	}
 	return s
+}
+
+// Product calculates the product of a slice of integers by multiplying all the elements together.
+func Product(s []int) int {
+	return lo.Reduce(s, func(agg, item, _ int) int { return agg * item }, 1)
 }
