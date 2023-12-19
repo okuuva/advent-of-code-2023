@@ -98,5 +98,13 @@ func findLowestLocation(sets sets) int {
 func solve(s *helpers.Scanner) (int, int) {
 	seeds, almanacMaps := parseInput(s)
 	part1 := findLowestLocation(traceMaps(seeds, almanacMaps))
-	return part1, 0
+	part2Seeds := []int{}
+	// FIXME: this approach doesn't really work since it takes forever to complete
+	// for i, j := 0, 1; j < len(seeds); i, j = i+2, j+2 {
+	// 	start, length := seeds[i], seeds[j]
+	// 	end := start + length
+	// 	part2Seeds = append(part2Seeds, helpers.MakeRange(start, end)...)
+	// }
+	part2 := findLowestLocation(traceMaps(part2Seeds, almanacMaps))
+	return part1, part2
 }
