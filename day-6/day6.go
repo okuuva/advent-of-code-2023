@@ -2,6 +2,8 @@ package main
 
 import (
 	"regexp"
+	"strconv"
+	"strings"
 
 	"github.com/okuuva/advent-of-code-2023/helpers"
 )
@@ -26,6 +28,15 @@ func parseInput(s *helpers.Scanner) races {
 	return races
 }
 
+func fixParsedInput(races races) race {
+	time, distance := strings.Builder{}, strings.Builder{}
+	for _, r := range races {
+		time.WriteString(strconv.Itoa(r[0]))
+		distance.WriteString(strconv.Itoa(r[1]))
+	}
+	return race{helpers.Atoi(time.String()), helpers.Atoi(distance.String())}
+}
+
 func numberOfWinningOptions(r race) int {
 	options := 0
 	totalTime, targetDistance := r[0], r[1]
@@ -48,7 +59,7 @@ func numbersOfWinningOptions(races races) []int {
 
 func solve(s *helpers.Scanner) (int, int) {
 	races := parseInput(s)
-	part2 := 0
 	part1 := helpers.Product(numbersOfWinningOptions(races))
+	part2 := numberOfWinningOptions(fixParsedInput(races))
 	return part1, part2
 }
