@@ -9,6 +9,7 @@ import (
 func main() {
 	scanner := helpers.NewScanner("input.txt")
 	defer scanner.Close()
-	locationNumber, _ := solve(scanner)
-	fmt.Printf("part1 location number: %v\n", locationNumber)
+	part1, part2 := solve(scanner)
+	fmt.Printf("part1 location number: %v\n", part1)
+	fmt.Printf("part2 location number: %v\n", part2)
 }
