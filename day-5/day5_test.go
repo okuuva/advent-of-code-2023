@@ -17,7 +17,7 @@ var expectedSets = [][]int{
 func TestTraceMaps(t *testing.T) {
 	scanner := helpers.NewScanner("testInput.txt")
 	defer scanner.Close()
-	sets := traceMaps(scanner)
+	sets := traceMaps(parseInput(scanner))
 	for i, v := range sets {
 		if !reflect.DeepEqual(v, expectedSets[i]) {
 			t.Errorf("expected %v, got %v", expectedSets[i], v)
