@@ -64,12 +64,11 @@ func parseInput(s *helpers.Scanner) ([]int, almanacMaps) {
 	return seeds, almanacMaps
 }
 
-func traceMaps(s *helpers.Scanner) sets {
-	seeds, almanacMaps := parseInput(s)
+func traceMaps(seeds []int, almanacMaps almanacMaps) sets {
 	sets := make(sets, len(seeds))
 	for i, prev := range seeds {
 		sets[i] = make([]int, len(mapNames)+1)
-        sets[i][0] = prev
+		sets[i][0] = prev
 		for j, mapName := range mapNames {
 			for _, _range := range almanacMaps[mapName] {
 				destStart, sourceStart, length := _range[0], _range[1], _range[2]
@@ -85,8 +84,7 @@ func traceMaps(s *helpers.Scanner) sets {
 	return sets
 }
 
-func solve(s *helpers.Scanner) (int, int) {
-	sets := traceMaps(s)
+func findLowestLocation(sets sets) int {
 	lowestLocation := math.MaxInt
 	for _, set := range sets {
 		location := set[len(set)-1]
@@ -94,5 +92,11 @@ func solve(s *helpers.Scanner) (int, int) {
 			lowestLocation = location
 		}
 	}
-	return lowestLocation, 0
+	return lowestLocation
+}
+
+func solve(s *helpers.Scanner) (int, int) {
+	seeds, almanacMaps := parseInput(s)
+	part1 := findLowestLocation(traceMaps(seeds, almanacMaps))
+	return part1, 0
 }
